@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secure-www
+  labels:
+    app: www
+    #secure: enabled
+spec:
+  containers:
+    - name: nginx
+      image: "nginx:1.10.0"
+      lifecycle:
+        preStop:
+          exec:
+            command: ["/usr/sbin/nginx","-s","quit"]
+      volumeMounts:
+        - name: "nginx-proxy-conf"
+          mountPath: "/etc/nginx/conf.d"
+        - name: "tls-certs"
+          mountPath: "/etc/tls"
+    - name: standalone
+      image: asia.gcr.io/tekapocart/www:1.0.0
+      env:
+        - name: TC_DOMAIN
+          value: "k8s.tekapo.io"
+        - name: ADMIN_MAIL
+          value: "hi@tekapo.io"
+        - name: DB_RT_PASSWD
+          value: a12345678
+        - name: DB_PASSWD
+          value: a12345667
+      #args:
+      #  - "-http=0.0.0.0:80"
+      #  - "-health=0.0.0.0:81"
+      #  - "-secret=secret"
+      ports:
+        - name: http
+          containerPort: 80
+        - name: health
+          containerPort: 81
+      resources:
+        limits:
+          cpu: 0.2
+          memory: "10Mi"
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 81
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 15
+        timeoutSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /readiness
+          port: 81
+          scheme: HTTP
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+  volumes:
+    - name: "tls-certs"
+      secret:
+        secretName: "tls-certs"
+    - name: "nginx-proxy-conf"
+      configMap:
+        name: "nginx-proxy-conf"
+        items:
+          - key: "proxy.conf"
+            path: "proxy.conf"
