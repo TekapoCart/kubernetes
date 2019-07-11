@@ -4,7 +4,7 @@ metadata:
   name: pod-secure-www
   labels:
     app: www
-    #secure: enabled
+    secure: enabled
 spec:
   containers:
     - name: nginx
@@ -19,44 +19,18 @@ spec:
         - name: "tls-certs"
           mountPath: "/etc/tls"
     - name: www
-      image: asia.gcr.io/tekapocart/www:1.0.0
-      env:
-        - name: TC_DOMAIN
-          value: "k8s.tekapo.io"
-        - name: ADMIN_MAIL
-          value: "hi@tekapo.io"
-        - name: DB_RT_PASSWD
-          value: a12345678
-        - name: DB_PASSWD
-          value: a12345667
-      #args:
-      #  - "-http=0.0.0.0:80"
-      #  - "-health=0.0.0.0:81"
-      #  - "-secret=secret"
+      image: httpd:latest
+#      image: asia.gcr.io/tekapocart/www:1.0.0
+#      env:
+#        - name: TC_DOMAIN
+#          value: 127.0.0.1
       ports:
         - name: http
           containerPort: 80
-        - name: health
-          containerPort: 81
       resources:
         limits:
           cpu: 0.2
           memory: "10Mi"
-      livenessProbe:
-        httpGet:
-          path: /healthz
-          port: 81
-          scheme: HTTP
-        initialDelaySeconds: 5
-        periodSeconds: 15
-        timeoutSeconds: 5
-      readinessProbe:
-        httpGet:
-          path: /readiness
-          port: 81
-          scheme: HTTP
-        initialDelaySeconds: 5
-        timeoutSeconds: 1
   volumes:
     - name: "tls-certs"
       secret:
