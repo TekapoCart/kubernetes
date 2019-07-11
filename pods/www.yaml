@@ -12,6 +12,9 @@ spec:
 #        - "-http=0.0.0.0:80"
 #        - "-health=0.0.0.0:81"
 #        - "-secret=secret"
+      env:
+        - name: TC_DOMAIN
+          value: 127.0.0.1
       ports:
         - name: http
           containerPort: 80
