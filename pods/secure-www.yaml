@@ -18,7 +18,7 @@ spec:
           mountPath: "/etc/nginx/conf.d"
         - name: "tls-certs"
           mountPath: "/etc/tls"
-    - name: standalone
+    - name: www
       image: asia.gcr.io/tekapocart/www:1.0.0
       env:
         - name: TC_DOMAIN
