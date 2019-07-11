@@ -4,7 +4,6 @@ metadata:
   name: pod-www
   labels:
     app: www
-    purpose: demonstrate
 spec:
   containers:
     - name: www
@@ -13,11 +12,12 @@ spec:
 #        - "-http=0.0.0.0:80"
 #        - "-health=0.0.0.0:81"
 #        - "-secret=secret"
-#      ports:
-#        - name: http
-#          containerPort: 80
+      ports:
+        - name: http
+          containerPort: 80
 #        - name: health
 #          containerPort: 81
+      imagePullPolicy: Always
       resources:
         limits:
           cpu: 0.2
