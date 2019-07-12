@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-www
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: www
+        track: stable
+        version: 1.0.0
+    spec:
+      containers:
+        - name: www
+          image: asia.gcr.io/tekapocart/www:1.0.0
+          env:
+            - name: TC_DOMAIN
+              value: k8s.tekapo.space
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

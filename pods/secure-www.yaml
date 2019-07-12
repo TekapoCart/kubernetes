@@ -19,8 +19,8 @@ spec:
         - name: "tls-certs"
           mountPath: "/etc/tls"
     - name: www
-      image: httpd:latest
-#      image: asia.gcr.io/tekapocart/www:1.0.0
+#      image: httpd:latest
+      image: asia.gcr.io/tekapocart/www:1.0.0
 #      env:
 #        - name: TC_DOMAIN
 #          value: 127.0.0.1
@@ -29,8 +29,8 @@ spec:
           containerPort: 80
       resources:
         limits:
-          cpu: 0.2
-          memory: "10Mi"
+          memory: "512Mi"
+          cpu: "500m"
   volumes:
     - name: "tls-certs"
       secret:
