@@ -1,14 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: service-tekapocart
+  name: service-frontend
 spec:
   selector:
-    app: www
-    secure: enabled
+    app: frontend
   ports:
     - protocol: TCP
       port: 443
       targetPort: 443
-      nodePort: 31000
-  type: NodePort
+  type: LoadBalancer

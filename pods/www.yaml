@@ -7,16 +7,16 @@ metadata:
 spec:
   containers:
     - name: www
-      image: httpd:latest
-#      image: asia.gcr.io/tekapocart/www:1.0.0
-#      env:
-#        - name: TC_DOMAIN
-#          value: 127.0.0.1
+#      image: httpd:latest
+      image: asia.gcr.io/tekapocart/www:1.0.0
+      env:
+        - name: TC_DOMAIN
+          value: k8s.tekapo.space
       ports:
         - name: http
           containerPort: 80
       imagePullPolicy: Always
       resources:
         limits:
-          memory: "512Mi"
-          cpu: "500m"
+          memory: 512Mi
+          cpu: 500m

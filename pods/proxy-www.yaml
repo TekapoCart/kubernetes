@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-proxy-www
+  labels:
+    app: www
+    secure: enabled
+spec:
+  containers:
+    - name: www
+#      image: httpd:latest
+      image: asia.gcr.io/tekapocart/www:1.0.0
+      env:
+        - name: TC_DOMAIN
+          value: k8s.tekapo.space
+      ports:
+        - name: http
+          containerPort: 80
+      resources:
+        limits:
+          memory: 512Mi
+          cpu: 500m
+    - name: nginx
+      image: nginx:1.10.0
+      lifecycle:
+        preStop:
+          exec:
+            command: ["/usr/sbin/nginx", "-s", "quit"]
+      volumeMounts:
+        - name: nginx-proxy-conf
+          mountPath: /etc/nginx/conf.d
+        - name: tls-certs
+          mountPath: /etc/tls
+  volumes:
+    - name: tls-certs
+      secret:
+        secretName: tls-certs
+    - name: nginx-proxy-conf
+      configMap:
+        name: nginx-proxy-conf
+        items:
+          - key: proxy.conf
+            path: proxy.conf
