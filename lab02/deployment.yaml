@@ -40,7 +40,8 @@ spec:
               name: env-var
               key: JWT_AUDIENCE
       - name: hello-app
-        image: asia.gcr.io/tekapocart/www
+        image: gcr.io/google-samples/hello-app:1.0
+        #image: asia.gcr.io/tekapocart/www
         env:
           - name: TC_DOMAIN
             value: api.endpoints.{{MY_PROJECT_ID}}.cloud.goog
