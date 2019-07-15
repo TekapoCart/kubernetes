@@ -24,3 +24,18 @@ spec:
             limits:
               memory: 512Mi
               cpu: 500m
+#          livenessProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 81
+#              scheme: HTTP
+#            initialDelaySeconds: 5
+#            periodSeconds: 15
+#            timeoutSeconds: 5
+#          readinessProbe:
+#            httpGet:
+#              path: /readiness
+#              port: 81
+#              scheme: HTTP
+#            initialDelaySeconds: 5
+#            timeoutSeconds: 1
