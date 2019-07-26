@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deployment
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+          # This is the official phpMyAdmin container
+        - image: phpmyadmin/phpmyadmin
+          name: phpmyadmin
+          # You can make environment variables from GKE secrets
+          # You can read them directly using 'secretKeyRef'
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: phpmyadmin-secret
+                  key: root-password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: phpmyadmin-secret
+                  key: user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: phpmyadmin-secret
+                  key: password
+            - name: PMA_HOST
+              value: {{PMA_HOST}}
+          ports:
+            - containerPort: 80
+              name: phpmyadmin

@@ -1,8 +1,7 @@
-# This is the only manifest in the project. It sets up a single pod with 1
-# replica. That pod contains two containers, phpMyAdmin and Cloud SQL Proxy. Both
-# containers rely on the GKE secrets that were added as part of the creation
-# scripts. There is no Service because we are using a very simple port-forward
-# to access the pod.
+# This is the only manifest in the project. It sets up a single pod with 1 replica.
+# That pod contains two containers, phpMyAdmin and Cloud SQL Proxy.
+# Both containers rely on the GKE secrets that were added as part of the creation scripts.
+# There is no Service because we are using a very simple port-forward to access the pod.
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -22,11 +21,11 @@ spec:
     spec:
       volumes:
         # If you made a secret as a file you can create a volume from it
-        - name: cloudsql-sa-creds
+        - name: proxy-sa-creds
           secret:
-            secretName: cloudsql-sa-creds
+            secretName: proxy-sa-creds
       containers:
-          # This is the official phpMyAdmin 4 container
+          # This is the official phpMyAdmin container
         - image: phpmyadmin/phpmyadmin
           name: phpmyadmin
           # You can make environment variables from GKE secrets
@@ -35,17 +34,17 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: phpmyadmin-console
+                  name: phpmyadmin-secret
                   key: root-password
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: phpmyadmin-console
+                  name: phpmyadmin-secret
                   key: user
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: phpmyadmin-console
+                  name: phpmyadmin-secret
                   key: password
           ports:
             - containerPort: 80
@@ -73,6 +72,6 @@ spec:
           # Once the volume is made earlier in the file you then mount the
           # volume so you can access the secret file inside it
           volumeMounts:
-            - name: cloudsql-sa-creds
+            - name: proxy-sa-creds
               mountPath: /secrets/cloudsql
               readOnly: true
