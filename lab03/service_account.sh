@@ -6,11 +6,6 @@
 # The second is for the GKE nodes and it gets the minimal permissions needed
 # for logging and monitoring as recommended by the GKE documentation
 
-# 共用 constants.sh
-# shellcheck disable=SC1090
-/bin/bash -c 'constants.sh'
-
-
 if [ -z "$PROJECT" ]; then
   echo "No default project set. Please set one with gcloud config"
   exit 1

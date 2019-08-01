@@ -4,11 +4,6 @@
 # Cloud SQL instance takes a long time so deleting it is a separate step
 # that includes a prompt in another script
 
-# shellcheck disable=SC1090
-/bin/bash -c 'source constants.sh'
-
-
-
 gcloud container clusters delete \
 mysql-demo-cluster --zone "$CLUSTER_ZONE" --quiet
 

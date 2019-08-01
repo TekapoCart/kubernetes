@@ -63,14 +63,16 @@ fi
 
 if sh prerequisites.sh; then
 
-  sh enable_apis.sh
-
   sh mysql_instance.sh
-  sh service_account.sh
 
   sh cluster.sh
+
   sh configs_and_secrets.sh
 
   sh proxy_deployment.sh
 
 fi
+
+
+
+

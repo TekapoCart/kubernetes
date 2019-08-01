@@ -46,6 +46,10 @@ spec:
                 secretKeyRef:
                   name: phpmyadmin-secret
                   key: password
+            - name: PMA_HOSTS
+              value: 127.0.0.1
+            - name: PMA_PORTS
+              value: 80
           ports:
             - containerPort: 80
               name: phpmyadmin
