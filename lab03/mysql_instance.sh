@@ -5,6 +5,8 @@ set -o errexit
 # This command is using the --async flag because it generally takes too long
 # to finish and causes gcloud to time out. The loop in the next section is
 # used to wait for the instance to reach a good state
+
+INSTANCE_NAME=$(cat .instance)
 gcloud sql instances create "$INSTANCE_NAME" \
 --database-version MYSQL_5_7 \
 --region "$INSTANCE_REGION" \

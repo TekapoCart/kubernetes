@@ -15,8 +15,8 @@ kubectl --namespace default create secret generic phpmyadmin-secret \
 # We can also store non-sensitive information in the cluster (in configmap)
 # NOTE：用 private ip 就不需要 connectionname
 
-CONNECTION_NAME=$(gcloud sql instances describe "$INSTANCE_NAME" \
---format="value(connectionName)")
+INSTANCE_NAME=$(cat .instance)
+CONNECTION_NAME=$(gcloud sql instances describe "$INSTANCE_NAME" --format="value(connectionName)")
 
 kubectl --namespace default create configmap connectionname \
 --from-literal=connectionname="$CONNECTION_NAME"

@@ -13,7 +13,6 @@ if [ -z "$CLUSTER_ZONE" ]; then
 fi
 
 INSTANCE_NAME=$(cat .instance)
-export INSTANCE_NAME
 if [ -z "$INSTANCE_NAME" ] ; then
   help
   exit 1

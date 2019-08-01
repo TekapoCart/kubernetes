@@ -25,20 +25,6 @@ if [ -z "$DB_USER" ] ; then
   exit 1
 fi
 
-INSTANCE_REGION=$(gcloud config get-value compute/region)
-export INSTANCE_REGION
-if [ -z "$INSTANCE_REGION" ]; then
-  echo "Make sure that compute/region is set in gcloud config"
-  exit 1
-fi
-
-CLUSTER_ZONE=$(gcloud config get-value compute/zone)
-export CLUSTER_ZONE
-if [ -z "$CLUSTER_ZONE" ]; then
-  echo "Make sure that compute/zone is set in gcloud config"
-  exit 1
-fi
-
 if [ -z "$DB_ROOT_PASSWORD" ]; then
   echo "Enter a password for root"
   read -r DB_ROOT_PASSWORD
