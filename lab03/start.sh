@@ -3,18 +3,16 @@
 # original version: https://github.com/GoogleCloudPlatform/gke-cloud-sql-postgres-demo
 
 help() {
-  echo "./start.sh MYSQL_USER"
+  echo "sh start.sh MYSQL_USER"
   ehco "可直接設定密碼或稍後設定"
 }
-
-ROOT=$(dirname "${BASH_SOURCE[0]}")
 
 LC_CTYPE=C
 RANDOM_SUFFIX=$(tr -dc 'a-z0-9' </dev/urandom | fold -w 6 | head -n 1)
 export INSTANCE_NAME=demo-mysql-${RANDOM_SUFFIX}
 
 # 在 validate.sh, teardown.sh 時用
-echo "$INSTANCE_NAME" > "${ROOT}"/.instance
+echo "$INSTANCE_NAME" > .instance
 
 if [ -z "$INSTANCE_NAME" ] ; then
   help
@@ -63,18 +61,16 @@ if [ -z "$DB_PASSWORD" ] ; then
   exit 1
 fi
 
-#ROOT=$(dirname "${BASH_SOURCE[0]}")
+if scripts/prerequisites.sh; then
 
-if "$ROOT"/scripts/prerequisites.sh; then
+  sh scripts/enable_apis.sh
 
-  "$ROOT"/scripts/enable_apis.sh
+  sh scripts/mysql_instance.sh
+  sh scripts/service_account.sh
 
-  "$ROOT"/scripts/mysql_instance.sh
-  "$ROOT"/scripts/service_account.sh
+  sh scripts/cluster.sh
+  sh scripts/configs_and_secrets.sh
 
-  "$ROOT"/scripts/cluster.sh
-  "$ROOT"/scripts/configs_and_secrets.sh
-
-  "$ROOT"/scripts/proxy_deployment.sh
+  sh scripts/proxy_deployment.sh
 
 fi

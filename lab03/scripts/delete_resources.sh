@@ -4,9 +4,8 @@
 # Cloud SQL instance takes a long time so deleting it is a separate step
 # that includes a prompt in another script
 
-ROOT=$(dirname "${BASH_SOURCE[0]}")
 # shellcheck disable=SC1090
-source "${ROOT}"/constants.sh
+source constants.sh
 
 
 

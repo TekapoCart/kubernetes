@@ -3,9 +3,8 @@
 # This script is to make sure that the create script ran correctly. It will
 # make sure the Cloud SQL instance is up, as well as the GKE cluster and pod
 
-ROOT=$(dirname "${BASH_SOURCE[0]}")
 # shellcheck disable=SC1090
-source "${ROOT}"/scripts/constants.sh
+source scripts/constants.sh
 
 help() {
   echo "./validate.sh INSTANCE_NAME"
@@ -16,7 +15,7 @@ if [ -z "$CLUSTER_ZONE" ]; then
   exit 1
 fi
 
-INSTANCE_NAME=$(cat "${ROOT}"/.instance)
+INSTANCE_NAME=$(cat .instance)
 export INSTANCE_NAME
 if [ -z "$INSTANCE_NAME" ] ; then
   help
@@ -40,7 +39,7 @@ fi
 # This method involves giving the 'get' command the same manifest used to
 # create the object. It will find an object matching
 # the description in the manifest
-if ! kubectl --namespace default get -f "$ROOT"/manifests/proxy-deployment.yaml > /dev/null; then
+if ! kubectl --namespace default get -f manifests/proxy-deployment.yaml > /dev/null; then
   echo "FAIL: phpMyAdmin4 Deployment object does not exist"
 else
   echo "phpMyAdmin Deployment object exists"

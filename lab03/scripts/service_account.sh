@@ -7,9 +7,8 @@
 # for logging and monitoring as recommended by the GKE documentation
 
 # 共用 constants.sh
-ROOT=$(dirname "${BASH_SOURCE[0]}")
 # shellcheck disable=SC1090
-source "${ROOT}"/constants.sh
+source constants.sh
 
 
 if [ -z "$PROJECT" ]; then
