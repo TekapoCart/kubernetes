@@ -4,7 +4,7 @@
 # make sure the Cloud SQL instance is up, as well as the GKE cluster and pod
 
 # shellcheck disable=SC1090
-source scripts/constants.sh
+source constants.sh
 
 help() {
   echo "./validate.sh INSTANCE_NAME"
@@ -39,7 +39,7 @@ fi
 # This method involves giving the 'get' command the same manifest used to
 # create the object. It will find an object matching
 # the description in the manifest
-if ! kubectl --namespace default get -f ../manifests/proxy-deployment.yaml > /dev/null; then
+if ! kubectl --namespace default get -f proxy-deployment.yaml > /dev/null; then
   echo "FAIL: phpMyAdmin4 Deployment object does not exist"
 else
   echo "phpMyAdmin Deployment object exists"

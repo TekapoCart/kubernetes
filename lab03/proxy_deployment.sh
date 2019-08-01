@@ -5,7 +5,7 @@
 # The pod only exists as one replica.
 
 
-kubectl --namespace default create -f ../manifests/proxy-deployment.yaml
+kubectl --namespace default create -f proxy-deployment.yaml
 
 # Waiting for the pod to actually deploy correctly
-kubectl --namespace default rollout status --request-timeout="5m" -f ../manifests/proxy-deployment.yaml
+kubectl --namespace default rollout status --request-timeout="5m" -f proxy-deployment.yaml

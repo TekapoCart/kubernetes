@@ -61,16 +61,16 @@ if [ -z "$DB_PASSWORD" ] ; then
   exit 1
 fi
 
-if sh scripts/prerequisites.sh; then
+if sh prerequisites.sh; then
 
-  sh scripts/enable_apis.sh
+  sh enable_apis.sh
 
-  sh scripts/mysql_instance.sh
-  sh scripts/service_account.sh
+  sh mysql_instance.sh
+  sh service_account.sh
 
-  sh scripts/cluster.sh
-  sh scripts/configs_and_secrets.sh
+  sh cluster.sh
+  sh configs_and_secrets.sh
 
-  sh scripts/proxy_deployment.sh
+  sh proxy_deployment.sh
 
 fi

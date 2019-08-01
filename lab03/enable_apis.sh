@@ -2,7 +2,7 @@
 
 # This script checks to make sure that the pre-requisite APIs are enabled.
 
-enable_api() {
+function enable_api() {
   SERVICE=$1
   if [[ $(gcloud services list --format="value(serviceConfig.name)" \
                                 --filter="serviceConfig.name:$SERVICE" 2>&1) != \

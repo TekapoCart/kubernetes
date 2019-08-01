@@ -15,5 +15,5 @@ if [ -z "$INSTANCE_NAME" ] ; then
   exit 1
 fi
 
-sh scripts/delete_resources.sh
-sh scripts/delete_instance.sh
+sh delete_resources.sh
+sh delete_instance.sh

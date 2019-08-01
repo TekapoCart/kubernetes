@@ -7,7 +7,7 @@ set -o errexit
 
 # 共用 constants.sh
 # shellcheck disable=SC1090
-source scripts/constants.sh
+source constants.sh
 
 GKE_VERSION=$(gcloud container get-server-config --zone "$CLUSTER_ZONE" \
   --format="value(validMasterVersions[0])")
