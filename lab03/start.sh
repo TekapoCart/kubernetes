@@ -61,7 +61,7 @@ if [ -z "$DB_PASSWORD" ] ; then
   exit 1
 fi
 
-if scripts/prerequisites.sh; then
+if sh scripts/prerequisites.sh; then
 
   sh scripts/enable_apis.sh
 
