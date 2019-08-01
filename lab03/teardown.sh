@@ -5,7 +5,7 @@
 # accounts
 
 help() {
-  echo "./teardown.sh INSTANCE_NAME"
+  echo "sh teardown.sh INSTANCE_NAME"
 }
 
 INSTANCE_NAME=$(cat .instance)

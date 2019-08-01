@@ -25,7 +25,7 @@ until [  $COUNTER -lt 2 ]; do
   COUNTER=$(( COUNTER - 1 ))
 done
 
-if [[ $COUNTER -lt 2 ]]; then
+if [ $COUNTER -lt 2 ]; then
   echo "Cloud SQL instance creation timed out"
   exit 1
 fi

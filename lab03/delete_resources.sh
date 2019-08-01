@@ -5,7 +5,7 @@
 # that includes a prompt in another script
 
 # shellcheck disable=SC1090
-source constants.sh
+/bin/bash -c 'source constants.sh'
 
 
 

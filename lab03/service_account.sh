@@ -8,7 +8,7 @@
 
 # 共用 constants.sh
 # shellcheck disable=SC1090
-source constants.sh
+/bin/bash -c 'constants.sh'
 
 
 if [ -z "$PROJECT" ]; then

@@ -4,7 +4,7 @@
 # make sure the Cloud SQL instance is up, as well as the GKE cluster and pod
 
 # shellcheck disable=SC1090
-source constants.sh
+/bin/bash -c 'source constants.sh'
 
 help() {
   echo "./validate.sh INSTANCE_NAME"
