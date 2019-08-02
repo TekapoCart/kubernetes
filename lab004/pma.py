@@ -33,8 +33,8 @@ def GenerateConfig(context):
           'port': application_port,
           # Define the variables that are exposed to container as env variables.
           'dockerEnv': {
-              'PMA_PORT': mysql_port,
-              'PMA_HOST': '$(ref.' + backend + '.networkInterfaces[0].networkIP)'
+              'PMA_HOST': '$(ref.' + backend + '.networkInterfaces[0].networkIP)',
+              'PMA_PORT': mysql_port
           },
           # If left out will default to 1
           'size': 2,
