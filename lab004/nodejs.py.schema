@@ -6,7 +6,7 @@ info:
 
 imports:
 - path: frontend.py
-- path: common/python/container_vm.py
+- path: common/container_vm.py
   name: container_vm.py
 
 required:
