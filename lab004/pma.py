@@ -1,4 +1,4 @@
-"""Create nodejs template with the back-end and front-end templates."""
+"""Create pma template with the back-end and front-end templates."""
 
 
 def GenerateConfig(context):
@@ -14,8 +14,9 @@ def GenerateConfig(context):
       'type': 'container_vm.py',
       'properties': {
           'zone': context.properties['zone'],
-          'dockerImage': 'gcr.io/deployment-manager-examples/mysql',
-          'containerImage': 'family/cos-stable',
+          'dockerImage': 'mariadb',
+          # 'dockerImage': 'gcr.io/deployment-manager-examples/mysql',
+          # 'containerImage': 'family/cos-stable',
           'port': mysql_port
       }
   }, {
@@ -23,13 +24,12 @@ def GenerateConfig(context):
       'type': 'frontend.py',
       'properties': {
           'zone': context.properties['zone'],
-          'dockerImage': 'gcr.io/deployment-manager-examples/nodejsservice',
+          'dockerImage': 'phpmyadmin/phpmyadmin',
           'port': application_port,
           # Define the variables that are exposed to container as env variables.
           'dockerEnv': {
               'SEVEN_SERVICE_MYSQL_PORT': mysql_port,
-              'SEVEN_SERVICE_PROXY_HOST': '$(ref.' + backend
-                                          + '.networkInterfaces[0].networkIP)'
+              'SEVEN_SERVICE_PROXY_HOST': '$(ref.' + backend + '.networkInterfaces[0].networkIP)'
           },
           # If left out will default to 1
           'size': 2,

@@ -1,10 +1,10 @@
 # ref: https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/examples/v2/nodejs
 
 imports:
-- path: nodejs.py
+- path: pma.py
 
 resources:
-- name: nodejs
-  type: nodejs.py
+- name: pma
+  type: pma.py
   properties:
     zone: {{MY_ZONE}}
