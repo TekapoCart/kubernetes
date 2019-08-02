@@ -1,5 +1,3 @@
-# https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/examples/v2/nodejs
-
 """Create nodejs template with the back-end and front-end templates."""
 
 

@@ -1,3 +1,5 @@
+# ref: https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/examples/v2/nodejs
+
 imports:
 - path: nodejs.py
 
