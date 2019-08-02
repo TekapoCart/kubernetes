@@ -5,4 +5,4 @@ resources:
 - name: nodejs
   type: nodejs.py
   properties:
-    zone: ZONE_TO_RUN
+    zone: {{MY_ZONE}}

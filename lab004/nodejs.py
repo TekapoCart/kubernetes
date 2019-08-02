@@ -36,7 +36,7 @@ def GenerateConfig(context):
           # If left out will default to 1
           'size': 2,
           # If left out will default to 1
-          'maxSize': 20
+          'maxSize': {{MAX_SIZE}}
       }
   }, {
       'name': firewall,
