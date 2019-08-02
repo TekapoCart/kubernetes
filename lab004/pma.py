@@ -8,15 +8,18 @@ def GenerateConfig(context):
   frontend = context.env['deployment'] + '-frontend'
   firewall = context.env['deployment'] + '-application-fw'
   application_port = 8080
-  mysql_port = 8080
+  mysql_port = 5432
   resources = [{
       'name': backend,
       'type': 'container_vm.py',
       'properties': {
           'zone': context.properties['zone'],
           'dockerImage': 'mariadb',
+          'dockerEnv': {
+              'MYSQL_ALLOW_EMPTY_PASSWORD': 'yes'
+          },
           # 'dockerImage': 'gcr.io/deployment-manager-examples/mysql',
-          # 'containerImage': 'family/cos-stable',
+          'containerImage': 'family/cos-stable',
           'port': mysql_port
       }
   }, {
@@ -28,8 +31,8 @@ def GenerateConfig(context):
           'port': application_port,
           # Define the variables that are exposed to container as env variables.
           'dockerEnv': {
-              'SEVEN_SERVICE_MYSQL_PORT': mysql_port,
-              'SEVEN_SERVICE_PROXY_HOST': '$(ref.' + backend + '.networkInterfaces[0].networkIP)'
+              'PMA_PORT': mysql_port,
+              'PMA_HOST': '$(ref.' + backend + '.networkInterfaces[0].networkIP)'
           },
           # If left out will default to 1
           'size': 2,
