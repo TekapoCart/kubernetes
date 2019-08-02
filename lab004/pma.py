@@ -7,8 +7,8 @@ def GenerateConfig(context):
   backend = context.env['deployment'] + '-backend'
   frontend = context.env['deployment'] + '-frontend'
   firewall = context.env['deployment'] + '-application-fw'
-  application_port = 8080
-  mysql_port = 5432
+  application_port = 80
+  mysql_port = 3306
   resources = [{
       'name': backend,
       'type': 'container_vm.py',
