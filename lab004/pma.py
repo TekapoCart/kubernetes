@@ -16,7 +16,9 @@ def GenerateConfig(context):
           'zone': context.properties['zone'],
           'dockerImage': 'mariadb',
           'dockerEnv': {
-              'MYSQL_ALLOW_EMPTY_PASSWORD': 'yes'
+              'MYSQL_ROOT_PASSWORD': '12345678',
+              'MYSQL_USER': 'tekapocart',
+              'MYSQL_PASSWORD': '12345678'
           },
           # 'dockerImage': 'gcr.io/deployment-manager-examples/mysql',
           'containerImage': 'family/cos-stable',
